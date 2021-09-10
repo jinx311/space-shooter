@@ -11,8 +11,12 @@ def main():
     pygame.display.set_icon(logo)
     pygame.display.set_caption("minimal program")
      
+
+    display_sizex = 500
+    display_sizey = 500
+    spaceship_radius = 30
     # create a surface on screen that has the size of 240 x 180
-    screen = pygame.display.set_mode((500,500))
+    screen = pygame.display.set_mode((display_sizex,display_sizey))
      
     # define a variable to control the main loop
     running = True
@@ -41,11 +45,23 @@ def main():
                 x=x+10
                 print("d is pressed")
         
-        
+
+            # check if y or x is larger than display size or smaller than 0, if so set to max screen size or 0
+        if ((x+spaceship_radius)>display_sizex):
+            x = display_sizex-spaceship_radius
+        if ((y+spaceship_radius)>display_sizey):
+            y = display_sizey-spaceship_radius
+        if ((x-spaceship_radius)<0):  
+            x = 0+spaceship_radius
+        if ((y-spaceship_radius)<0):
+            y = 0+spaceship_radius
+
+    
+
 
 
         screen.fill((255,255,255))
-        pygame.draw.circle(screen, (0,255,0), (x,y), 75)
+        pygame.draw.circle(screen, (0,255,0), (x,y), spaceship_radius)
 
 
         # should be after all visual updates in loop. redraws screen
